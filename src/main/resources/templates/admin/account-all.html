@@ -137,7 +137,7 @@
 
 
         <div class="filter-section mb-3">
-            <select class="form-select" id="statusFilter" onchange="filterAccounts()">
+            <label for="statusFilter"></label><select class="form-select" id="statusFilter" onchange="filterAccounts()">
                 <option value="">Tất cả</option>
                 <option value="1">Hoạt động</option>
                 <option value="0">Ngưng hoạt động</option>
@@ -321,12 +321,12 @@
                         <td>${account.email}</td>
                         <td>${account.customer.customerId}</td>                
                         <td>
-                            <span>${account.status == 1 ? 'Hoạt động' : 'Ngưng hoạt động'}</span>
+                            <span>${account.status === 1 ? 'Hoạt động' : 'Ngưng hoạt động'}</span>
                         </td>
                         <td>${account.time}</td>
                         <td class="d-flex justify-content-evenly">
                             <button type="button" class="btn btn-warning btn-sm" data-id="${account.accountId}" onclick="editAccount(this)">Chỉnh sửa</button>
-                            <button type="button" class="btn btn-danger btn-sm" data-id="${account.accountId}" ${account.status == 0 ? 'disabled' : ''} onclick="deleteAccount(this)">Xóa</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-id="${account.accountId}" ${account.status === 0 ? 'disabled' : ''} onclick="deleteAccount(this)">Xóa</button>
                         </td>
                     `;
 
