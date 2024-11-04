@@ -1,0 +1,30 @@
+package models.entities;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "seat")
+public class SeatEntity {
+    @Id
+    @Column(name = "SeatID", nullable = false)
+    private Integer seatID;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "BusID")
+    private BusEntity bus;
+
+    @Column(name = "SeatNumber", nullable = false, length = 5)
+    private String seatNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "SeatStatus", nullable = false)
+    private SeatStatus seatStatus;
+
+
+}
