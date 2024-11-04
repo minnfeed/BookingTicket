@@ -16,7 +16,7 @@ public class SeatEntity {
     private Integer seatID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "BusID")
+    @JoinColumn(name = "BusID", nullable = false)
     private BusEntity bus;
 
     @Column(name = "SeatNumber", nullable = false, length = 5)
@@ -26,5 +26,7 @@ public class SeatEntity {
     @Column(name = "SeatStatus", nullable = false)
     private SeatStatus seatStatus;
 
-
+    public  Integer getBusID() {
+        return bus != null ? bus.getBusID() : null;
+    }
 }

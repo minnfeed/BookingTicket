@@ -20,7 +20,7 @@ public class PaymentEntity {
     private Integer paymentID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TicketID")
+    @JoinColumn(name = "TicketID", nullable = false)
     private TicketEntity ticket;
 
     @Column(name = "PaymentMethod", nullable = false, length = 50)
@@ -32,5 +32,7 @@ public class PaymentEntity {
     @Column(name = "PaymentDate", nullable = false)
     private LocalDateTime paymentDate;
 
-
+    public Integer getTicketID() {
+        return ticket != null ? ticket.getTicketID() : null;
+    }
 }

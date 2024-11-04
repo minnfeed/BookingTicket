@@ -19,7 +19,7 @@ public class BusEntity {
     private Integer busID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "BusCompanyID")
+    @JoinColumn(name = "BusCompanyID", nullable = false)
     private BusCompanyEntity busCompany;
 
     @Column(name = "LicensePlate", nullable = false, length = 20)
@@ -38,5 +38,18 @@ public class BusEntity {
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TripEntity> trips;
 
+    public Integer getBusCompanyID() {
+        return  busCompany != null ? busCompany.getBusCompanyID() : null;
+    }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "Bus ID:" + getBusID() +
+                "\nBus Company ID:" + getBusCompanyID() +
+                "\nLicense Plate:" + getLicensePlate() +
+                "\nSeat Count:" + getSeatCount() +
+                "\nBus Type:" + getBusType() +
+                "}";
+    }
 }
