@@ -1,4 +1,4 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "payment")
+@Table(name = "Payment")
 public class PaymentEntity {
-
     @Id
-    @Column(name = "PaymentID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PaymentID")
     private Integer paymentID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "TicketID", nullable = false)
     private TicketEntity ticket;
 
@@ -31,8 +31,4 @@ public class PaymentEntity {
 
     @Column(name = "PaymentDate", nullable = false)
     private LocalDateTime paymentDate;
-
-    public Integer getTicketID() {
-        return ticket != null ? ticket.getTicketID() : null;
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,21 +11,22 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ticket")
+@Table(name = "Ticket")
 public class TicketEntity {
     @Id
-    @Column(name = "TicketID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TicketID")
     private Integer ticketID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "CustomerID", nullable = false)
     private CustomerEntity customer;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "TripID", nullable = false)
     private TripEntity trip;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "SeatID", nullable = false)
     private SeatEntity seat;
 
@@ -34,18 +35,5 @@ public class TicketEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PaymentStatus", nullable = false)
-    private PaymentStatus paymentStatus;
-
-    public Integer getCustomerID() {
-        return customer != null ? customer.getCustomerID() : null;
-    }
-
-    public Integer getTripID() {
-        return  trip != null ? trip.getTripID() : null;
-    }
-
-    public Integer getSeatID() {
-        return seat != null ? seat.getSeatID() : null;
-    }
+    private PaymentStatus paymentStatus; // Enum cho trạng thái thanh toán
 }
-

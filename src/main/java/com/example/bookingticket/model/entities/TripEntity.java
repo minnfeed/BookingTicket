@@ -1,10 +1,9 @@
-package com.example.bookingticket.models.entities;
-
+package com.example.bookingticket.model.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,13 +11,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "trip")
+@Table(name = "Trip")
 public class TripEntity {
     @Id
-    @Column(name = "TripID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TripID")
     private Integer tripID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "BusID", nullable = false)
     private BusEntity bus;
 
@@ -34,10 +34,6 @@ public class TripEntity {
     @Column(name = "ArrivalTime", nullable = false)
     private LocalDateTime arrivalTime;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TicketEntity> tickets;
-
-    public Integer BusID() {
-        return bus != null ? bus.getBusID() : null;
-    }
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TicketEntity> tickets;
 }

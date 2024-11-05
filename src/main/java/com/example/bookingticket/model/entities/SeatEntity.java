@@ -1,7 +1,8 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @Getter
 @Setter
@@ -9,13 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "seat")
+@Table(name = "Seat")
 public class SeatEntity {
     @Id
-    @Column(name = "SeatID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SeatID")
     private Integer seatID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "BusID", nullable = false)
     private BusEntity bus;
 
@@ -25,8 +27,4 @@ public class SeatEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "SeatStatus", nullable = false)
     private SeatStatus seatStatus;
-
-    public  Integer getBusID() {
-        return bus != null ? bus.getBusID() : null;
-    }
 }

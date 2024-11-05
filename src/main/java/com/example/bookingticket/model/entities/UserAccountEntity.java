@@ -1,4 +1,4 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,21 +9,21 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "useraccount")
+@Table(name = "UserAccount")
 public class UserAccountEntity {
     @Id
-    @Column(name = "PhoneNumber", nullable = false, length = 50)
+    @Column(name = "PhoneNumber", length = 50)
     private String phoneNumber;
 
-    @Column(name = "Password", nullable = false, length = 50)
+    @Column(name = "Password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Role", nullable = false)
-    private  Role role;
+    private Role role;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "PhoneNumber", referencedColumnName = "PhoneNumber")
+    @JoinColumn(name = "phoneNumber")
     private CustomerEntity customer;
 }

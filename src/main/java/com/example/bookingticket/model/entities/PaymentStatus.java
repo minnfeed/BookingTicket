@@ -1,5 +1,8 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
+import lombok.Getter;
+
+@Getter
 public enum PaymentStatus {
     PAID("Paid"),
     PENDING("Pending"),
@@ -13,7 +16,6 @@ public enum PaymentStatus {
 
     @Override
     public String toString() {
-        return this.status;
+        return status;
     }
 }
-

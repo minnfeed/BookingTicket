@@ -1,5 +1,8 @@
-package com.example.bookingticket.models.entities;
+package com.example.bookingticket.model.entities;
 
+import lombok.Getter;
+
+@Getter
 public enum SeatStatus {
     AVAILABLE("Available"),
     BOOKED("Booked"),
@@ -13,6 +16,6 @@ public enum SeatStatus {
 
     @Override
     public String toString() {
-        return this.status;
+        return status;
     }
 }
