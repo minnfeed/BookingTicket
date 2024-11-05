@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Payment")
+@Table(name = "payment")
 public class PaymentEntity {
 
     @Id
@@ -21,7 +21,7 @@ public class PaymentEntity {
     private Integer paymentID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TicketID", nullable = false)
+    @JoinColumn(name = "TicketID", referencedColumnName = "TicketID", nullable = false)
     private TicketEntity ticket;
 
     @Column(name = "PaymentMethod", nullable = false, length = 50)

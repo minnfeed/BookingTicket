@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Bus")
+@Table(name = "bus")
 public class BusEntity {
 
     @Id
@@ -20,7 +20,7 @@ public class BusEntity {
     private Integer busID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "BusCompanyID", nullable = false)
+    @JoinColumn(name = "BusCompanyID", referencedColumnName = "BusCompanyID", nullable = false)
     private BusCompanyEntity busCompany;
 
     @Column(name = "LicensePlate", nullable = false, length = 20)
@@ -28,7 +28,6 @@ public class BusEntity {
 
     @Column(name = "SeatCount", nullable = false)
     private Integer seatCount;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "BusType", nullable = false)
@@ -41,20 +40,19 @@ public class BusEntity {
     private List<TripEntity> trips;
 
     // Hàm trả về BusCompanyID
-//    public Integer getBusCompanyID() {
-//        return busCompany != null ? busCompany.getBusCompanyID() : null;
-//    }
+    public Integer getBusCompanyID() {
+        return busCompany != null ? busCompany.getBusCompanyID() : null;
+    }
 
     // Override toString để in thông tin chi tiết
     @Override
     public String toString() {
         return "{" +
                 "Bus ID: " + busID +
-                ", Bus Company ID: " + (busCompany != null ? busCompany.getBusCompanyID() : null) +
+                ", Bus Company ID: " + getBusCompanyID() +
                 ", License Plate: " + licensePlate +
                 ", Seat Count: " + seatCount +
                 ", Bus Type: " + busType +
                 "}";
     }
-
 }

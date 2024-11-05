@@ -9,14 +9,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "UserAccount")
+@Table(name = "useraccount")
 public class UserAccountEntity {
     @Id
     @Column(name = "PhoneNumber", nullable = false, length = 50)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String phoneNumber;
 
-    @Column(name = "Password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false, length = 50)
     private String password;
 
     @Enumerated(EnumType.STRING)

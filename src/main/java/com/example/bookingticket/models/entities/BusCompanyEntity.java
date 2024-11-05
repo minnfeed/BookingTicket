@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Buscompany")
+@Table(name = "buscompany")
 public class BusCompanyEntity {
     @Id
     @Column(name = "BusCompanyID", nullable = false)
@@ -19,15 +19,14 @@ public class BusCompanyEntity {
     private Integer busCompanyID;
 
     @Column(name = "BusCompanyName", nullable = false, length = 100)
-    private String  busCompanyName;
+    private String busCompanyName;
 
-    @Column(name = "Address", nullable = false, length = 100)
-    private String  address;
+    @Column(name = "address", nullable = false, length = 100)
+    private String address;
 
     @Column(name = "PhoneNumber", nullable = false, length = 20)
-    private String  phoneNumber;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "busCompany")
     private List<BusEntity> buses;
-
 }

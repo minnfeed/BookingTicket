@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Seat")
+@Table(name = "seat")
 public class SeatEntity {
     @Id
     @Column(name = "SeatID", nullable = false)
@@ -17,7 +17,7 @@ public class SeatEntity {
     private Integer seatID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "BusID", nullable = false)
+    @JoinColumn(name = "BusID", referencedColumnName ="BusID", nullable = false)
     private BusEntity bus;
 
     @Column(name = "SeatNumber", nullable = false, length = 5)

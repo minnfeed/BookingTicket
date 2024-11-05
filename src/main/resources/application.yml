@@ -1,10 +1,9 @@
 spring:
-  application:
-    name: BookingTicket
   datasource:
-    url: jdbc:mysql://localhost:3306/bookingticket?useSSL=false&allowPublicKeyRetrieval=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bookingticket
     username: root
-    password: ""
+    password:
   servlet:
     multipart:
       max-file-size: 5MB
@@ -12,6 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     properties:
       hibernate:
@@ -32,3 +33,4 @@ server:
   port: 8080
   error:
     include-message: always
+

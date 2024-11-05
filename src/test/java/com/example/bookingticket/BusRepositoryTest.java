@@ -2,12 +2,13 @@ package com.example.bookingticket;
 
 import com.example.bookingticket.Repository.BusCompanyRepository;
 import com.example.bookingticket.Repository.BusRepository;
-import com.example.bookingticket.models.entities.BusCompanyEntity;
-import com.example.bookingticket.models.entities.BusEntity;
-import com.example.bookingticket.models.entities.BusType;
+import com.example.bookingticket.Repository.CustomerRepository;
+import com.example.bookingticket.Repository.UserAccountRepository;
+import com.example.bookingticket.models.entities.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +23,11 @@ public class BusRepositoryTest {
     @Autowired
     private BusRepository busRepository;
     @Autowired
-
     private BusCompanyRepository busCompanyRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private UserAccountRepository accountRepository;
     @Test
     @Transactional
     public void testViewBusData() {
@@ -37,13 +41,15 @@ public class BusRepositoryTest {
         busList.forEach(bus -> {
             System.out.println("-------------");
             System.out.println("Bus ID: " + bus.getBusID());
-            System.out.println("Bus Company ID: " + bus.getBusCompany());
+            // Nếu bạn muốn in BusCompanyID, bạn cần gọi phương thức tương ứng
+            System.out.println("Bus Company ID: " + (bus.getBusCompany() != null ? bus.getBusCompany().getBusCompanyID() : "Không có công ty"));
             System.out.println("License Plate: " + bus.getLicensePlate());
             System.out.println("Seat Count: " + bus.getSeatCount());
             System.out.println("Bus Type: " + bus.getBusType());
             System.out.println("-------------");
         });
     }
+
     @Test
     @Transactional
     public void createBusEntity() {
@@ -64,6 +70,26 @@ public class BusRepositoryTest {
         // Kiểm tra lại xem BusEntity đã được lưu thành công chưa
         List<BusEntity> busList = busRepository.findAll();
         assertFalse(busList.isEmpty(), "Bảng Bus không nên trống");
+    }
+    @Test
+    @Transactional
+    public void createCustomerEntity() {
+        // Tạo tài khoản người dùng trước
+        UserAccountEntity userAccount = new UserAccountEntity();
+        userAccount.setPhoneNumber("123456789");
+        userAccount.setPassword("securepassword"); // Thay đổi mật khẩu theo nhu cầu của bạn
+        accountRepository.save(userAccount); // Lưu tài khoản người dùng
+
+        // Sau đó, tạo khách hàng
+        CustomerEntity customer = new CustomerEntity();
+        customer.setCustomerName("Customer Name");
+        customer.setEmail("customer@example.com");
+        customer.setPhoneNumber(userAccount.getPhoneNumber()); // Sử dụng số điện thoại từ tài khoản người dùng
+        customerRepository.save(customer); // Lưu khách hàng
+
+        // Kiểm tra lại xem khách hàng đã được lưu thành công chưa
+        List<CustomerEntity> customerList = customerRepository.findAll();
+        assertFalse(customerList.isEmpty(), "Bảng Customer không nên trống");
     }
 
 }

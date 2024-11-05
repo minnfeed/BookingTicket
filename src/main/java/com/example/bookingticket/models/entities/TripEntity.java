@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Trip")
+@Table(name = "trip")
 public class TripEntity {
     @Id
     @Column(name = "TripID", nullable = false)
@@ -20,7 +20,7 @@ public class TripEntity {
     private Integer tripID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "BusID", nullable = false)
+    @JoinColumn(name = "BusID", referencedColumnName = "BusID", nullable = false)
     private BusEntity bus;
 
     @Column(name = "DepartureLocation", nullable = false, length = 100)

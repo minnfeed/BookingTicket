@@ -13,7 +13,7 @@ public class DatabaseConnectionTest {
     }
 
     public static void getBusData() {
-        String query = "SELECT * FROM Bus"; // Truy vấn để lấy tất cả các bản ghi từ bảng Bus
+        String query = "SELECT * FROM bus"; // Truy vấn để lấy tất cả các bản ghi từ bảng Bus
 
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              Statement statement = connection.createStatement();

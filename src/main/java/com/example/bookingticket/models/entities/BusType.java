@@ -1,8 +1,8 @@
 package com.example.bookingticket.models.entities;
 
 public enum BusType {
-    GIUONG_NAM("Giường nằm"),
-    GHE_NGOI("Ghế ngồi");
+    GIUONG_NAM("Giường nằm"), // Khớp với giá trị trong DB
+    GHE_NGOI("Ghế ngồi"); // Khớp với giá trị trong DB
 
     private final String value;
 
@@ -10,12 +10,8 @@ public enum BusType {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     @Override
     public String toString() {
-        return this.value;
+        return value; // Trả về giá trị tương ứng với tiếng Việt
     }
 }

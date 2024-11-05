@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Ticket")
+@Table(name = "ticket")
 public class TicketEntity {
     @Id
     @Column(name = "TicketID", nullable = false)
@@ -19,18 +19,18 @@ public class TicketEntity {
     private Integer ticketID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "CustomerID", nullable = false)
+    @JoinColumn(name = "CustomerID", referencedColumnName ="CustomerID", nullable = false)
     private CustomerEntity customer;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TripID", nullable = false)
+    @JoinColumn(name = "TripID", referencedColumnName ="TripID", nullable = false)
     private TripEntity trip;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "SeatID", nullable = false)
+    @JoinColumn(name = "SeatID", referencedColumnName ="SeatID", nullable = false)
     private SeatEntity seat;
 
-    @Column(name = "Price", nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)

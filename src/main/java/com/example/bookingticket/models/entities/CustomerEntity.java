@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Customer")
+@Table(name = "customer")
 public class CustomerEntity {
 
     @Id
@@ -26,7 +26,7 @@ public class CustomerEntity {
     @Column(name = "Email", nullable = false, length = 100)
     private String email;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserAccountEntity userAccount;
 
 }
