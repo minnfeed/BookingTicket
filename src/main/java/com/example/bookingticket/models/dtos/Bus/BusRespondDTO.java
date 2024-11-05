@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BusRespondDTO {
     private Integer busID;
-    private Integer busCompanyID;
+    private Integer busCompany;
     private  String licensePlate;
     private Integer seatCount;
     private String busType;

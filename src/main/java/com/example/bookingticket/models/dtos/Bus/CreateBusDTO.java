@@ -17,7 +17,7 @@ public class CreateBusDTO {
     Integer busID;
 
     @NotNull(message = "Bus Company ID can't be null")
-    Integer busCompanyID;
+    Integer busCompany;
 
     @NotBlank(message = "License Plate can't be null")
     String licensePlate;

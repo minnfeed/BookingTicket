@@ -20,7 +20,7 @@ public class BusEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "BusCompanyID", nullable = false)
-    private BusCompanyEntity busCompanyID;
+    private BusCompanyEntity busCompany;
 
     @Column(name = "LicensePlate", nullable = false, length = 20)
     private  String licensePlate;
@@ -39,7 +39,7 @@ public class BusEntity {
     private List<TripEntity> trips;
 
     public Integer getBusCompanyID() {
-        return  busCompanyID != null ? busCompanyID.getBusCompanyID() : null;
+        return  busCompany != null ? busCompany.getBusCompanyID() : null;
     }
 
     @Override
