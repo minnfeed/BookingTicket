@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Ticket")
+@Table(name = "ticket")
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +35,5 @@ public class TicketEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PaymentStatus", nullable = false)
-    private PaymentStatus paymentStatus; // Enum cho trạng thái thanh toán
+    private PaymentStatus paymentStatus;
 }

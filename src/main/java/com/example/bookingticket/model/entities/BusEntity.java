@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Bus")
+@Table(name = "bus")
 public class BusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class BusEntity {
     private Integer busID;
 
     @ManyToOne
-    @JoinColumn(name = "BusCompanyID", nullable = false)
+    @JoinColumn(name = "BusCompanyID", referencedColumnName = "BusCompanyID", nullable = false)
     private BusCompanyEntity busCompany;
 
     @Column(name = "LicensePlate", nullable = false, length = 20, unique = true)
