@@ -12,11 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "payment")
+@Table(name = "Payment")
 public class PaymentEntity {
 
     @Id
     @Column(name = "PaymentID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer paymentID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

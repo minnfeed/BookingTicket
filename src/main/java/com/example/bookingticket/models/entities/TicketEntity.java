@@ -11,10 +11,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ticket")
+@Table(name = "Ticket")
 public class TicketEntity {
     @Id
     @Column(name = "TicketID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

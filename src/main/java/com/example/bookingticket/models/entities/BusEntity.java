@@ -1,6 +1,5 @@
 package com.example.bookingticket.models.entities;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,44 +11,50 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bus")
+@Table(name = "Bus")
 public class BusEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BusID", nullable = false)
     private Integer busID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "BusCompanyID", nullable = false)
-    private BusCompanyEntity busCompanyID;
+    private BusCompanyEntity busCompany;
 
     @Column(name = "LicensePlate", nullable = false, length = 20)
-    private  String licensePlate;
+    private String licensePlate;
 
     @Column(name = "SeatCount", nullable = false)
     private Integer seatCount;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "BusType", nullable = false)
     private BusType busType;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bus")
     private List<SeatEntity> seats;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bus")
     private List<TripEntity> trips;
 
-    public Integer getBusCompanyID() {
-        return  busCompanyID != null ? busCompanyID.getBusCompanyID() : null;
-    }
+    // Hàm trả về BusCompanyID
+//    public Integer getBusCompanyID() {
+//        return busCompany != null ? busCompany.getBusCompanyID() : null;
+//    }
 
+    // Override toString để in thông tin chi tiết
     @Override
     public String toString() {
         return "{" +
-                "Bus ID:" + getBusID() +
-                "\nBus Company ID:" + getBusCompanyID() +
-                "\nLicense Plate:" + getLicensePlate() +
-                "\nSeat Count:" + getSeatCount() +
-                "\nBus Type:" + getBusType() +
+                "Bus ID: " + busID +
+                ", Bus Company ID: " + (busCompany != null ? busCompany.getBusCompanyID() : null) +
+                ", License Plate: " + licensePlate +
+                ", Seat Count: " + seatCount +
+                ", Bus Type: " + busType +
                 "}";
     }
+
 }

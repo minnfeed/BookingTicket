@@ -9,10 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "seat")
+@Table(name = "Seat")
 public class SeatEntity {
     @Id
     @Column(name = "SeatID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seatID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

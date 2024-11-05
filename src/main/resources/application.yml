@@ -1,8 +1,10 @@
 spring:
+  application:
+    name: BookingTicket
   datasource:
-    url: jdbc:mysql://localhost:3306/bookingticket
+    url: jdbc:mysql://localhost:3306/bookingticket?useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password:
+    password: ""
   servlet:
     multipart:
       max-file-size: 5MB
@@ -30,4 +32,3 @@ server:
   port: 8080
   error:
     include-message: always
-

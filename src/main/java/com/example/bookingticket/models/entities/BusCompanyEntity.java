@@ -11,10 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "buscompany")
+@Table(name = "Buscompany")
 public class BusCompanyEntity {
     @Id
     @Column(name = "BusCompanyID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer busCompanyID;
 
     @Column(name = "BusCompanyName", nullable = false, length = 100)
@@ -26,7 +27,7 @@ public class BusCompanyEntity {
     @Column(name = "PhoneNumber", nullable = false, length = 20)
     private String  phoneNumber;
 
-    @OneToMany(mappedBy = "busCompany", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "busCompany")
     private List<BusEntity> buses;
 
 }

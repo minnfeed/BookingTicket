@@ -12,10 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "trip")
+@Table(name = "Trip")
 public class TripEntity {
     @Id
     @Column(name = "TripID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tripID;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -34,7 +35,7 @@ public class TripEntity {
     @Column(name = "ArrivalTime", nullable = false)
     private LocalDateTime arrivalTime;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "trip")
     private List<TicketEntity> tickets;
 
     public Integer BusID() {

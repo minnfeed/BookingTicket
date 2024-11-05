@@ -1,5 +1,6 @@
 package com.example.bookingticket.models.dtos.Bus;
 
+import com.example.bookingticket.models.entities.BusType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class CreateBusDTO {
     Integer busID;
 
     @NotNull(message = "Bus Company ID can't be null")
-    Integer busCompanyID;
+    Integer busCompany;
 
     @NotBlank(message = "License Plate can't be null")
     String licensePlate;
@@ -26,6 +27,6 @@ public class CreateBusDTO {
     Integer seatCount;
 
     @NotNull(message = "Bus Type can't be null")
-    String busType;
+    BusType busType;
 
 }
