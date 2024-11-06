@@ -1,7 +1,7 @@
 package com.example.bookingticket;
 
 import com.example.bookingticket.Repository.BusRepository;
-import com.example.bookingticket.model.entities.TourbusEntity;
+import com.example.bookingticket.model.entities.BusEntity;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class BusRepositoryTest {
     @Test
     public void testFindByLicensePlate() {
         String licensePlate = "29A-12345"; // Đảm bảo giá trị này tồn tại trong cơ sở dữ liệu
-        Optional<TourbusEntity> bus = busRepository.findByLicensePlate(licensePlate);
+        Optional<BusEntity> bus = busRepository.findByLicensePlate(licensePlate);
         System.out.println("Result: " + bus.orElse(null)); // In ra kết quả truy vấn
         assertTrue(bus.isPresent(), "Expecting Optional to contain a value but it was empty.");
     }
@@ -32,7 +32,7 @@ public class BusRepositoryTest {
     @Test
     public void testFindByNonExistentLicensePlate() {
         // Thử tìm xe buýt theo biển số không tồn tại
-        Optional<TourbusEntity> foundBus = busRepository.findByLicensePlate("XX-XXXX");
+        Optional<BusEntity> foundBus = busRepository.findByLicensePlate("XX-XXXX");
 
         // Kiểm tra xem kết quả không có giá trị
         assertThat(foundBus).isNotPresent();

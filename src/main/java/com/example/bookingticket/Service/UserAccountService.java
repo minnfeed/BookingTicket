@@ -12,6 +12,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.Random;
+
 @Service
 public class UserAccountService {
     @Autowired
@@ -46,7 +49,7 @@ public class UserAccountService {
         UserAccountEntity userAccount = UserAccountEntity.builder()
                 .phoneNumber(createCustomerDTO.getPhoneNumber())
                 .password(password)  // Lưu mật khẩu trực tiếp
-                .role(Role.CUSTOMER)  // Hoặc có thể là ADMIN tùy thuộc vào yêu cầ// Gán CustomerEntity cho UserAccountEntity
+                .role(Role.Customer)  // Hoặc có thể là ADMIN tùy thuộc vào yêu cầ// Gán CustomerEntity cho UserAccountEntity
                 .build();
 
         // Lưu UserAccountEntity vào database
@@ -67,4 +70,44 @@ public class UserAccountService {
 
         return "Login successful!";
     }
+//    @Autowired
+//    private EmailService emailService;
+//
+//    // Chức năng reset mật khẩu
+//    public String resetPassword(String email) {
+//        // Kiểm tra nếu email có tồn tại trong cơ sở dữ liệu
+//        Optional<UserAccountEntity> userOptional = userAccountRepository.findByEmail(email);
+//
+//        if (!userOptional.isPresent()) {
+//            return "Email không tồn tại!";
+//        }
+//
+//        // Tạo mật khẩu ngẫu nhiên
+//        String newPassword = generateRandomPassword();
+//
+//        UserAccountEntity user = userOptional.get();
+//        user.setPassword(newPassword);  // Lưu mật khẩu không mã hóa trực tiếp vào database
+//
+//        // Lưu lại mật khẩu mới vào cơ sở dữ liệu
+//        userAccountRepository.save(user);
+//
+//        // Gửi email với mật khẩu mới
+//        emailService.sendEmail(user.getEmail(), "Mật khẩu mới của bạn", "Mật khẩu mới của bạn là: " + newPassword);
+//
+//        return "Mật khẩu mới đã được gửi tới email của bạn!";
+//    }
+//
+//    // Hàm tạo mật khẩu ngẫu nhiên
+//    private String generateRandomPassword() {
+//        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//        Random random = new Random();
+//        StringBuilder password = new StringBuilder();
+//
+//        for (int i = 0; i < 8; i++) {
+//            int index = random.nextInt(characters.length());
+//            password.append(characters.charAt(index));
+//        }
+//
+//        return password.toString();
+//    }
 }

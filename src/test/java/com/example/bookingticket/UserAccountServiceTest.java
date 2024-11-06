@@ -25,27 +25,58 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class UserAccountServiceTest {
     @Autowired
+    private UserAccountService userAccountService;
+
+    @Autowired
     private UserAccountRepository userAccountRepository;
 
-    public void testPrintAllUserAccounts() {
-        // Lấy tất cả các tài khoản người dùng từ cơ sở dữ liệu
-        List<UserAccountEntity> userAccounts = userAccountRepository.findAll();
-
-        // In ra thông tin của từng tài khoản người dùng
-        if (userAccounts.isEmpty()) {
-            System.out.println("No user accounts found.");
-        } else {
-            for (UserAccountEntity userAccount : userAccounts) {
-                System.out.println("Phone Number: " + userAccount.getPhoneNumber());
-                System.out.println("Password: " + userAccount.getPassword());
-                System.out.println("Role: " + userAccount.getRole());
-                System.out.println("----------------------------");
-            }
-        }
+    @BeforeEach
+    public void setUp() {
+        // Reset database or prepare mock data if needed
     }
+
     @Test
-    public void runTest() {
-        System.out.println("Testing: Print All User Accounts...");
-        testPrintAllUserAccounts();
+    public void testLoginUser_Success() {
+        // Tạo dữ liệu người dùng
+        String phoneNumber = "0901234567";
+        String password = "01029321";
+        UserAccountEntity userAccount = new UserAccountEntity();
+        userAccount.setPhoneNumber(phoneNumber);
+        userAccount.setPassword(password);
+        userAccount.setRole(Role.Customer);
+
+        // Lưu người dùng vào database (thực tế)
+        userAccountRepository.save(userAccount);
+
+        // Kiểm tra đăng nhập thành công
+        String result = userAccountService.loginUser(phoneNumber, password);
+        assertEquals("Login successful!", result);
+    }
+
+    @Test
+    public void testLoginUser_PhoneNumberNotFound() {
+        // Kiểm tra khi không có số điện thoại trong cơ sở dữ liệu
+        String phoneNumber = "0901234567";
+        String result = userAccountService.loginUser(phoneNumber, "password123");
+        assertEquals("Phone number not found!", result);
+    }
+
+    @Test
+    public void testLoginUser_InvalidPassword() {
+        // Tạo dữ liệu người dùng
+        String phoneNumber = "0901234567";
+        String correctPassword = "password123";
+        String wrongPassword = "wrongPassword";
+        UserAccountEntity userAccount = new UserAccountEntity();
+        userAccount.setPhoneNumber(phoneNumber);
+        userAccount.setPassword(correctPassword);
+        userAccount.setRole(Role.Customer);
+
+        // Lưu người dùng vào database
+        userAccountRepository.save(userAccount);
+
+        // Kiểm tra khi mật khẩu không chính xác
+        String result = userAccountService.loginUser(phoneNumber, wrongPassword);
+        assertEquals("Invalid password!", result);
     }
 }

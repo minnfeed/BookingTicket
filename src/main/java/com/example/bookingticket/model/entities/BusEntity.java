@@ -3,8 +3,6 @@ package com.example.bookingticket.model.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Builder
@@ -13,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tourbus")
 
-public class TourbusEntity {
+public class BusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "busid")

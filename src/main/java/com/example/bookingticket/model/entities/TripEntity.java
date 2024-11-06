@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -20,7 +19,7 @@ public class TripEntity {
 
     @ManyToOne
     @JoinColumn(name = "busid", nullable = false)
-    private TourbusEntity bus;
+    private BusEntity bus;
 
     @Column(name = "departurelocation", nullable = false)
     private String departureLocation;

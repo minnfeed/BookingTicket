@@ -19,7 +19,7 @@ public class SeatEntity {
 
     @ManyToOne
     @JoinColumn(name = "busid", nullable = false)
-    private TourbusEntity bus;
+    private BusEntity bus;
 
     @Column(name = "seatnumber", nullable = false)
     private String seatNumber;
