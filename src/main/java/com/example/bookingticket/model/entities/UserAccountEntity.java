@@ -21,8 +21,4 @@ public class UserAccountEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "phonenumber")
-    private CustomerEntity customer;
 }
